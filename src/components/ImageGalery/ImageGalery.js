@@ -5,7 +5,7 @@ import { fetchImg } from "../api/Pixaby";
 
 export class ImageGalery extends Component {
     state={
-        imgArrey : null
+        imgArrey : [],
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.galeryImgName !== this.props.galeryImgName) {
@@ -18,7 +18,7 @@ export class ImageGalery extends Component {
     }
     
     render() {
-        console.log(this.state.imgArrey)
+        // console.log(this.state.imgArrey)
         return <ul>
             {/* <p>{this.props.galeryImgName}</p> */}
             {this.props.galeryImgName && <ImageGaleryitem imageArray={this.state.imgArrey }/>}

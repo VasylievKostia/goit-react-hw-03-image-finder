@@ -15,7 +15,7 @@ export default class App extends Component {
 
   handleFormSubmit = (imgName) => {
     this.setState({imgName})
-    console.log(imgName)
+    // console.log(imgName)
   }
 
 
@@ -23,8 +23,6 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>{this.state.serchedImg && (<div className='asd'>{this.state.serchedImg.hits[0].webformatURL}</div>)}</div>
-        
         <Searchbar onSubmit={this.handleFormSubmit }/>
         <ImageGalery galeryImgName={ this.state.imgName}/>
         <ToastContainer autoClose={3000 }/>
