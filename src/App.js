@@ -15,7 +15,7 @@ export default class App extends Component {
 
   handleFormSubmit = (imgName) => {
     this.setState({imgName})
-    // console.log(imgName)
+    console.log('APPimgName:',imgName)
   }
 
 
