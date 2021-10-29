@@ -13,45 +13,43 @@ export class ImageGalery extends Component {
             this.setState({ imgName: this.props.imgName })
 
             
-            console.log('old prop1:', prevProps.imgName)
-            console.log('new prop1:', this.props.imgName)
+            console.log('prevProps.imgName:', prevProps.imgName)
+            console.log('this.props.imgName:', this.props.imgName)
             console.log("old state1:",prevState.imgName)
             console.log('new state1:', this.state.imgName)
             
-            this.fetchArray(this.props.imgName)
-            console.log("arrey", this.state.imgArrey)
+            // this.fetchArray(this.props.imgName)
+            // console.log("arrey", this.state.imgArrey)
         }
 
 
 
-        // if (prevState.imgName !== this.state.imgName)
+        if (prevState.imgName !== this.state.imgName)
         
     //  if (prevProps.imgName !== this.props.imgName)
-    //  {
+     {
          
-    //      console.log('rabotaet!!:',this.props.imgName)
+         console.log('prevState.imgName !== this.state.imgName',this.props.imgName)
     // //         this.setState({ imgName: this.props.imgName })
          
          // MAIN!!!!
-    //        fetch( 
-    //   `https://pixabay.com/api/?q=${this.props.imgName}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
+           fetch( 
+      `https://pixabay.com/api/?q=${this.props.imgName}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
+            ).then(res => res.json())
+            .then(imgArrey => { this.setState({ imgArrey }) }
+            )
+            
+        console.log(this.state.imgArrey)
+        }
+    
+    }
+    // fetchArray = (propsImg) => {
+    // fetch( 
+    //   `https://pixabay.com/api/?q=${propsImg}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
     //         ).then(res => res.json())
     //         .then(imgArrey => { this.setState({ imgArrey }) }
     //      )
-
-
-
-        //  console.log(response)
-    //     }
-    
-    }
-    fetchArray = (propsImg) => {
-    fetch( 
-      `https://pixabay.com/api/?q=${propsImg}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
-            ).then(res => res.json())
-            .then(imgArrey => { this.setState({ imgArrey }) }
-         )
-    }
+    // }
     // componentDidMount() {
     //      this.setState({ imgName: this.props.imgName })
     //    console.log('GALERY 27 :',this.props.imgName)
