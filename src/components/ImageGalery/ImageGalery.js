@@ -9,28 +9,58 @@ export class ImageGalery extends Component {
         imgName:''
     }
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.imgName !== this.state.imgName) {
-            console.log('GALERY 13 :',this.props.galeryImgName)
-            fetch( 
-      `https://pixabay.com/api/?q=${this.props.galeryImgName}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
-    ).then(res => res.json())
-      .then(imgArrey => {this.setState({imgArrey})}
-            )
+        if (prevProps.imgName !== this.props.imgName) {
+            this.setState({ imgName: this.props.imgName })
+
             
- console.log('GALERY 20 :',this.props.galeryImgName)
+            console.log('old prop1:', prevProps.imgName)
+            console.log('new prop1:', this.props.imgName)
+            console.log("old state1:",prevState.imgName)
+            console.log('new state1:', this.state.imgName)
+            
+            this.fetchArray(this.props.imgName)
+            console.log("arrey", this.state.imgArrey)
         }
-        console.log('GALERY 22 :',this.props.galeryImgName)
+
+
+
+        // if (prevState.imgName !== this.state.imgName)
+        
+    //  if (prevProps.imgName !== this.props.imgName)
+    //  {
          
+    //      console.log('rabotaet!!:',this.props.imgName)
+    // //         this.setState({ imgName: this.props.imgName })
+         
+         // MAIN!!!!
+    //        fetch( 
+    //   `https://pixabay.com/api/?q=${this.props.imgName}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
+    //         ).then(res => res.json())
+    //         .then(imgArrey => { this.setState({ imgArrey }) }
+    //      )
+
+
+
+        //  console.log(response)
+    //     }
+    
     }
-    componentDidMount() {
-         this.setState({ imgName: this.props.imgName })
-       console.log('GALERY 27 :',this.props.galeryImgName)
+    fetchArray = (propsImg) => {
+    fetch( 
+      `https://pixabay.com/api/?q=${propsImg}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
+            ).then(res => res.json())
+            .then(imgArrey => { this.setState({ imgArrey }) }
+         )
     }
+    // componentDidMount() {
+    //      this.setState({ imgName: this.props.imgName })
+    //    console.log('GALERY 27 :',this.props.imgName)
+    // }
     render() {
         // console.log(this.state.imgArrey)
         return <ul>
             {/* <p>{this.props.galeryImgName}</p> */}
-            {this.props.galeryImgName && <ImageGaleryitem imageArray={this.state.imgArrey }/>}
+            {this.props.imgName && <ImageGaleryitem imageArray={this.state.imgArrey }/>}
             {/* <ImageGaleryitem /> */}
             {/* <fetchImg /> */}
         </ul>

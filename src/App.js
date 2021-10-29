@@ -10,12 +10,14 @@ import { render } from '@testing-library/react';
 export default class App extends Component {
   state = {
     serchedImg: null,
-    imgName:''
+    imgName: '',
+    
 }
 
   handleFormSubmit = (imgName) => {
     this.setState({imgName})
-    console.log('APPimgName:',imgName)
+    // this.setState({listSwitcher : true})
+    
   }
 
 
@@ -24,7 +26,8 @@ export default class App extends Component {
     return (
       <div className="App">
         <Searchbar onSubmit={this.handleFormSubmit }/>
-        <ImageGalery galeryImgName={ this.state.imgName}/>
+        {/* <ImageGalery galeryImgName={this.state.imgName} /> */}
+        <ImageGalery imgName={ this.state.imgName}/>
         <ToastContainer autoClose={3000 }/>
       </div>
     );
