@@ -21,7 +21,8 @@ export class Searchbar extends Component {
       return toast.error('nothing to search!');
     }
     this.props.onSubmit(this.state.inputValue)
-    this.setState({inputValue : ''})
+    this.setState({ inputValue: '' })
+    console.log('Before fetch in searchbar', this.state.inputValue )
   }
   
 

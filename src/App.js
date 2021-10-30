@@ -16,7 +16,7 @@ export default class App extends Component {
 
   handleFormSubmit = (imgName) => {
     this.setState({imgName})
-    // this.setState({listSwitcher : true})
+console.log('Before fetch in APP', this.state.imgName )
     
   }
 

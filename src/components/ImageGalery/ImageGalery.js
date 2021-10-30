@@ -26,10 +26,10 @@ export class ImageGalery extends Component {
 
         if (prevState.imgName !== this.state.imgName)
         
-    //  if (prevProps.imgName !== this.props.imgName)
+    
      {
          
-         console.log('prevState.imgName !== this.state.imgName',this.props.imgName)
+        console.log('Before fetch in LIST', this.state.imgName )
     // //         this.setState({ imgName: this.props.imgName })
          
          // MAIN!!!!
@@ -41,7 +41,9 @@ export class ImageGalery extends Component {
             
         console.log(this.state.imgArrey)
         }
-    
+        if (this.state.imgArrey !== prevState.imageArray) {
+            console.log('this.state.imgArrey !== prevState.imageArray |||this.state.imageArray=', this.state.imageArray)
+        }
     }
     // fetchArray = (propsImg) => {
     // fetch( 
