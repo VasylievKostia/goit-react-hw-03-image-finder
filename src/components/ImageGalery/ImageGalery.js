@@ -24,15 +24,12 @@ export class ImageGalery extends Component {
 
 
 
-        if (prevState.imgName !== this.state.imgName)
-        
-    
-     {
-         
+        if (prevState.imgName !== this.state.imgName) {
+         this.setState({ imgName: this.props.imgName })
         console.log('Before fetch in LIST', this.state.imgName )
-    // //         this.setState({ imgName: this.props.imgName })
+
          
-         // MAIN!!!!
+        
            fetch( 
       `https://pixabay.com/api/?q=${this.props.imgName}&page=1&key=23260269-a14f68c41e91863ff9df952e6`
             ).then(res => res.json())
@@ -60,7 +57,7 @@ export class ImageGalery extends Component {
         // console.log(this.state.imgArrey)
         return <ul>
             {/* <p>{this.props.galeryImgName}</p> */}
-            {this.props.imgName && <ImageGaleryitem imageArray={this.state.imgArrey }/>}
+            {this.state.imgArrey.length > 0 && <ImageGaleryitem imageArray={this.state.imgArrey }/>}
             {/* <ImageGaleryitem /> */}
             {/* <fetchImg /> */}
         </ul>

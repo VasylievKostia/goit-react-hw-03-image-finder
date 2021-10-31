@@ -9,17 +9,16 @@ export class ImageGaleryitem extends Component {
     }
 
     render() {
-      return <p>li</p>
-      // this.props.imageArray.hits.map((image) => (
-      // <li className={s.ImageGalleryItem} key={image.id}>
-      //   <img
-      //     src={image.webformatURL}
-      //     alt={image.tag}
-      //     className={s.ImageGalleryItemImage}
+      return  this.props.imageArray.hits.map((image) => (
+      <li className={s.ImageGalleryItem} key={image.id}>
+        <img
+          src={image.webformatURL}
+          alt={image.tag}
+          className={s.ImageGalleryItemImage}
        
-      //   />
-      // </li>
-    // ));
+        />
+      </li>
+    ));
   }
 }
 
