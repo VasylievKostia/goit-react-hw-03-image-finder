@@ -6,8 +6,8 @@ console.dir(axios)
 
 
 export class PixabyFetch {
-    constructor(base_url) {
-        this.base_url = base_url;
+    constructor() {
+        // this.base_url = base_url;
         // this.api_key = api_key;
         this._searchQuery = '';
         this._page = 1
@@ -28,10 +28,10 @@ export class PixabyFetch {
     }
 
     searchPhotos() {
-        axios.defaults.baseURL = this.base_url;
+        // axios.defaults.baseURL = this.base_url;
         // axios.defaults.headers.common.key = this.api_key
 
-        let url = `&q=${this.searchQuery}&page=${this.page}&per_page=12`
+        let url = `https://pixabay.com/api/?key=23260269-a14f68c41e91863ff9df952e6&q=${this.searchQuery}&page=${this.page}&per_page=12`
         
  
 

@@ -7,8 +7,8 @@ import { PixabyFetch } from '../api/Pixaby';
 
 const BASE_URL = 'https://pixabay.com/api/?key=23260269-a14f68c41e91863ff9df952e6'
 const KEY = '?key=23260269-a14f68c41e91863ff9df952e6'
-const newPixabyFetch = new PixabyFetch(BASE_URL)
-
+const newPixabyFetch = new PixabyFetch()
+console.log(newPixabyFetch)
 export class ImageGalery extends Component {
     state={
         searchResult: [],
@@ -19,8 +19,10 @@ export class ImageGalery extends Component {
         if (prevProps.searchValue !== this.props.searchValue) {
           console.log('fetch!!')
           this.setState({ status: 'loading'})
-        newPixabyFetch.searchQuery = this.props.searchValue
+          newPixabyFetch.searchQuery = this.props.searchValue
+          console.log(newPixabyFetch.searchQuery = this.props.searchValue)
           newPixabyFetch
+            
             .searchPhotos()
             .then(result => {
               this.setState({ searchResult: result, status: 'success' })
