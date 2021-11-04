@@ -4,6 +4,7 @@ import { ImageGaleryitem } from "../ImageGaleryitem/ImageGaleryitem";
 import { fetchImg } from "../api/Pixaby";
 import { render } from "@testing-library/react";
 import { PixabyFetch } from '../api/Pixaby';
+import s from './ImageGalery.module.css'
 
 const BASE_URL = 'https://pixabay.com/api/?key=23260269-a14f68c41e91863ff9df952e6'
 const KEY = '?key=23260269-a14f68c41e91863ff9df952e6'
@@ -18,23 +19,38 @@ export class ImageGalery extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.searchValue !== this.props.searchValue) {
           console.log('fetch!!')
-          this.setState({ status: 'loading'})
+          this.setState({ status: 'loading' })
+          newPixabyFetch.resetPage()
           newPixabyFetch.searchQuery = this.props.searchValue
           console.log(newPixabyFetch.searchQuery = this.props.searchValue)
-          newPixabyFetch
-            
+          newPixabyFetch  
             .searchPhotos()
             .then(result => {
               this.setState({ searchResult: result, status: 'success' })
-              console.log(result)
+              console.log('then result',result)
             })
-            .catch (err => {
-                  console.log(err)
-                  this.setState({status: 'error'})
-            })
+            .catch(err => {
+        console.log('catch result',err);
+        this.setState({ status: 'error' });
+      });
       
         }
-    }
+  }
+  handleClick = (e) => {
+    newPixabyFetch.page = 1
+    console.log(newPixabyFetch.page)
+    newPixabyFetch  
+        .searchPhotos()
+        .then(result => {
+          this.setState((prev) => ({
+            searchResult: [...prev.searchResult, ...result]
+          }))
+        })
+        .catch(err => {
+      this.setState({ status: 'error' });
+        });
+    
+  }
     render() {
     
         if (this.state.status === 'init') {
@@ -45,16 +61,19 @@ export class ImageGalery extends Component {
       }
       if (this.state.status === 'success') {
         return (
-        
-          <ul>
-            {this.state.searchResult.length > 0 && this.state.searchResult.map(el => {
+        <>
+          <ul className={s.ImageGallery}>
+            {/* {this.state.searchResult.length > 0 && this.state.searchResult.map(el => {
               return (
                 <li key={el.id}>
                   <img src={el.webformatURL} alt='' />
                 </li>
               )
-            })}
+            })} */}
+              <ImageGaleryitem searchResult={ this.state.searchResult}/>
           </ul>
+            <button type='button' onClick={this.handleClick}>Load More</button>
+        </>
         )
       }
       if (this.state.status === 'error') {

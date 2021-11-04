@@ -20,28 +20,6 @@ export default class App extends Component {
     
 }
 
-  // componentDidUpdate(prevProps,prevState) {
-  //   if (prevState.searchValue !== this.state.searchValue) {
-  //     // newPixabyFetch.searchQuery = this.state.searchValue
-  //     // newPixabyFetch.searchPhotos().then((r) =>
-  //     //   this.setState({ searchResult: r })
-        
-  //     // )
-  //     console.log('appStateSeacchResult=',this.state.searchResult)
-  //   }
-  // }
-  
-  // handleFormSubmit = (imgName) => {
-    // this.setState({imgName})
-// console.log('Before fetch in APP', this.state.imgName )
-    
-  // }
-  // handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   console.log('before fetch', this.state.searchValue)
-  //   // this.setState({searchValue: e.target.value})
-  //   // this.setState({ searchValue: ''})
-  //  }
 
   getSearchValue = (value) =>{
     this.setState({searchValue : value})

@@ -3,32 +3,18 @@ import { FetchImg } from "../api/Pixaby"
 import s from './ImageGaleryitem.module.css'
 
 
-export class ImageGaleryitem extends Component {
-    componentDidMount() {
-        // console.log(this.props.imageArray.hits[0])
+export function ImageGaleryitem(props) {
+  return (
+  <>
+    {props.searchResult.map(el => {
+        return (
+          <li key={el.id} className={s.ImageGalleryItem}>
+            <img src={el.webformatURL} alt='' className={ s.ImageGalleryItemImage}/>
+          </li>
+          ) 
+        }
+      )
     }
-
-    render() {
-      return  this.props.imageArray.hits.map((image) => (
-      <li className={s.ImageGalleryItem} key={image.id}>
-        <img
-          src={image.webformatURL}
-          alt={image.tag}
-          className={s.ImageGalleryItemImage}
-       
-        />
-      </li>
-    ));
-  }
+  </>
+      )
 }
-
-//     render() {
-//         return
-//         this.props.imageArray.hits.map((img) => {
-//             <li className={s.ImageGalleryItem} id={img.id}>
-//   <img src={img.webformatURL} alt="" className={s.ImageGalleryItemImage} />
-// </li>
-//         })}
-    
-//    }
-    
