@@ -2,13 +2,11 @@ import axios from 'axios'
 
 
 
-console.dir(axios)
+// console.dir(axios)
 
 
 export class PixabyFetch {
     constructor() {
-        // this.base_url = base_url;
-        // this.api_key = api_key;
         this._searchQuery = '';
         this._page = 1
     }
@@ -30,11 +28,6 @@ export class PixabyFetch {
         return (this._page = 1)
     }
     async searchPhotos() {
-        // axios.defaults.baseURL = this.base_url;
-        // axios.defaults.headers.common.key = this.api_key
-        console.log('this.searchQuery', this.searchQuery)
-        console.log('this.page',this.page)
-
 
         let url = `https://pixabay.com/api/?key=23260269-a14f68c41e91863ff9df952e6&q=${this.searchQuery}&page=${this.page}&per_page=12`
         try{
@@ -44,23 +37,5 @@ export class PixabyFetch {
         } catch (error) {
             return error
         }
-
-        // return axios
-        //     .get(url)
-        //     .then((result) => {
-        //         return result.data
-        //     })
-        //     .then((data) => {
-        //     // console.log(data.hits)
-        //     return data.hits
-            
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //         return err
-        //     })
-       
     }
-    
-    
 }

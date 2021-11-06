@@ -1,33 +1,39 @@
 import { Component } from "react";
-import { Searchbar } from "../Searchbar/Searchbar";
 import { ImageGaleryitem } from "../ImageGaleryitem/ImageGaleryitem";
-import { fetchImg } from "../api/Pixaby";
-import { render } from "@testing-library/react";
 import { PixabyFetch } from '../api/Pixaby';
+import { Button } from "../Button/Button";
 import s from './ImageGalery.module.css'
+import Loader from "react-loader-spinner";
+import {Modal} from "../Modal/Modal.js"
 
-const BASE_URL = 'https://pixabay.com/api/?key=23260269-a14f68c41e91863ff9df952e6'
-const KEY = '?key=23260269-a14f68c41e91863ff9df952e6'
+
 const newPixabyFetch = new PixabyFetch()
-console.log(newPixabyFetch)
+// console.log(newPixabyFetch)
 export class ImageGalery extends Component {
     state={
         searchResult: [],
-        status : 'init'
+        status : 'init',
+        showModal: false,
+        modalImg: ''
     }
     
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.searchValue !== this.props.searchValue) {
-          console.log('fetch!!')
+          // console.log('fetch!!')
           this.setState({ status: 'loading' })
           newPixabyFetch.resetPage()
           newPixabyFetch.searchQuery = this.props.searchValue
-          console.log(newPixabyFetch.searchQuery = this.props.searchValue)
+          // console.log(newPixabyFetch.searchQuery = this.props.searchValue)
           newPixabyFetch  
             .searchPhotos()
             .then(result => {
-              this.setState({ searchResult: result, status: 'success' })
-              console.log('then result',result)
+              if (result.length > 0) {
+               this.setState({ searchResult: result, status: 'success' })
+              // console.log('then result',result) 
+              }
+              else {
+                this.setState({ status: 'error' })
+              }
             })
             .catch(err => {
         console.log('catch result',err);
@@ -38,49 +44,62 @@ export class ImageGalery extends Component {
   }
   handleClick = (e) => {
     newPixabyFetch.page = 1
-    console.log(newPixabyFetch.page)
+    console.log(e)
     newPixabyFetch  
         .searchPhotos()
-        .then(result => {
+      .then(result => {
+          
           this.setState((prev) => ({
             searchResult: [...prev.searchResult, ...result]
           }))
+          this.props.pageScroll()
         })
+      
         .catch(err => {
       this.setState({ status: 'error' });
         });
     
   }
+  toggleModal = () => {
+    this.setState(prev => ({
+     showModal : !prev.showModal
+    }))
+  }
+  onImgClick = (e) => {
+    console.log(e.target)
+    this.setState({ modalImg: this.state.searchResult.find(el => el.webformatURL === e.target.src).largeImageURL })
+    this.toggleModal()
+  }
+
     render() {
     
         if (this.state.status === 'init') {
-            return <p>Enter your query</p>
+          return  <p className={s.init}>Enter your query</p>
+          
       }
       if (this.state.status === 'loading') {
-          return <p>LOADING......</p>
+        return <div className={s.loader}>
+          <Loader type="ThreeDots" color="#3f51b5" height={80} width={80} />
+          </div>
       }
       if (this.state.status === 'success') {
         return (
         <>
           <ul className={s.ImageGallery}>
-            {/* {this.state.searchResult.length > 0 && this.state.searchResult.map(el => {
-              return (
-                <li key={el.id}>
-                  <img src={el.webformatURL} alt='' />
-                </li>
-              )
-            })} */}
-              <ImageGaleryitem searchResult={ this.state.searchResult}/>
+              <ImageGaleryitem searchResult={ this.state.searchResult} onImgClick={this.onImgClick}/>
           </ul>
-            <button type='button' onClick={this.handleClick}>Load More</button>
+            <Button handleClick={this.handleClick} />
+            {this.state.showModal && <Modal modalImg={this.state.modalImg} onClose={this.toggleModal }/>}
         </>
         )
       }
       if (this.state.status === 'error') {
-        return <p>Всё пропало</p>
+        return <p className={s.error}>Something is wrong</p>
       }
+    }
+      
 }
-}
+
 
 
 
